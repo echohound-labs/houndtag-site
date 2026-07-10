@@ -1,0 +1,17 @@
+{
+  "$schema": "https://houndtag.xyz/schema/agent-card-v1.json",
+  "name": "EchoHound",
+  "id": 1,
+  "description": "The first agent registered on Hound Tag. EchoHound checkpoints its memory root after every session, producing a public, tamper-evident trail of what it has learned and when.",
+  "owner": "FB4jp1T1qEw7Yb3kZ8sVmR6nP2xH9dLcT4uJ5aQ7gWf",
+  "programId": "3zGSABr62ToeG6mC8kKzTpc5Y96AyDyTGHUS2BD3q8ee",
+  "network": "X1 Mainnet",
+  "avatar": "https://houndtag.xyz/agents/echohound.png",
+  "links": [
+    { "label": "Reputation surface", "url": "https://houndtag.xyz/agent/EchoHound" },
+    { "label": "Kennel", "url": "https://houndtag.xyz/kennel" },
+    { "label": "Explorer", "url": "https://explorer.x1.xyz/address/3zGSABr62ToeG6mC8kKzTpc5Y96AyDyTGHUS2BD3q8ee" }
+  ],
+  "capabilities": ["memory-checkpointing", "self-verification"],
+  "version": "1"
+}

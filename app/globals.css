@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --steel-950: #0b0d0e;
+  --steel-900: #111417;
+  --steel-800: #1c2226;
+  --steel-700: #272e33;
+  --steel-600: #3a444a;
+  --steel-500: #5b676e;
+  --steel-300: #9aa6ac;
+  --steel-100: #dfe5e8;
+  --phosphor: #3ff08a;
+  --rust: #d8a24a;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--steel-950);
+    color: var(--steel-100);
+    /* Milled-metal ground: a faint cool vignette over near-black, with a
+       hair-fine horizontal grain that only reads at close range. */
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, rgba(63, 240, 138, 0.05), transparent 55%),
+      radial-gradient(100% 60% at 50% 120%, rgba(58, 68, 74, 0.18), transparent 60%),
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.014) 0px,
+        rgba(255, 255, 255, 0.014) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(63, 240, 138, 0.22);
+    color: var(--steel-100);
+  }
+
+  /* Keyboard focus stays visible and on-brand. */
+  :focus-visible {
+    outline: 2px solid var(--phosphor);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* An eyebrow / stamped label: small, wide-tracked, engraved into the panel. */
+  .stamp-label {
+    @apply font-mono uppercase text-steel-500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.035);
+  }
+
+  /* Debossed text — pressed into the metal (used for big display type). */
+  .deboss {
+    color: var(--steel-100);
+    text-shadow:
+      0 1px 1px rgba(0, 0, 0, 0.7),
+      0 -1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* A raised steel panel with milled edges. */
+  .panel {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 40%),
+      linear-gradient(180deg, var(--steel-800), var(--steel-900));
+    border: 1px solid var(--steel-700);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.04) inset,
+      0 -18px 40px -30px rgba(0, 0, 0, 0.9) inset;
+  }
+
+  /* An engraved channel — hashes and addresses sit pressed into this. */
+  .engraved {
+    background: linear-gradient(180deg, var(--steel-950), #090b0c);
+    border: 1px solid #05070800;
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.85),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.045),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Brushed-steel surface for the hero dog-tag. */
+  .brushed {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 22%),
+      linear-gradient(180deg, #2a3237 0%, #1b2226 45%, #141a1d 100%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.018) 0px,
+        rgba(255, 255, 255, 0.018) 1px,
+        rgba(0, 0, 0, 0.02) 1px,
+        rgba(0, 0, 0, 0.02) 2px
+      );
+  }
+
+  /* The live phosphor dot with a soft bloom and a slow signal pulse. */
+  .live-dot {
+    background: var(--phosphor);
+    box-shadow: 0 0 0 2px rgba(63, 240, 138, 0.18), 0 0 10px 1px rgba(63, 240, 138, 0.55);
+    animation: pulse-live 2.4s ease-in-out infinite;
+  }
+
+  .stale-dot {
+    background: var(--rust);
+    box-shadow: 0 0 0 2px rgba(216, 162, 74, 0.14);
+  }
+}
+
+@keyframes pulse-live {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(63, 240, 138, 0.18), 0 0 10px 1px rgba(63, 240, 138, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 2px rgba(63, 240, 138, 0.10), 0 0 4px 0 rgba(63, 240, 138, 0.30);
+  }
+}
+
+@layer utilities {
+  .text-phosphor-glow {
+    color: var(--phosphor);
+    text-shadow: 0 0 12px rgba(63, 240, 138, 0.45);
+  }
+
+  /* Thin milled hairline divider. */
+  .rule-milled {
+    border-color: var(--steel-700);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
