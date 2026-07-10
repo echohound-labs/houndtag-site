@@ -137,6 +137,16 @@
   .rule-milled {
     border-color: var(--steel-700);
   }
+
+  /* Provenance plate — phosphor-lit, the whitepaper's flag-planting block. */
+  .provenance {
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgba(63, 240, 138, 0.10), transparent 55%),
+      linear-gradient(180deg, var(--steel-800), var(--steel-900));
+    box-shadow:
+      0 0 0 1px rgba(63, 240, 138, 0.10) inset,
+      0 20px 50px -30px rgba(63, 240, 138, 0.25);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

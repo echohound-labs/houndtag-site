@@ -36,6 +36,7 @@ export async function SiteFooter() {
           </div>
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-[0.14em] text-steel-500">
             <Link href="/kennel" className="hover:text-steel-200">Kennel</Link>
+            <Link href="/whitepaper" className="hover:text-steel-200">Whitepaper</Link>
             <Link href="/register" className="hover:text-steel-200">Register</Link>
             <a href={explorerHref} target="_blank" rel="noreferrer" className="hover:text-steel-200">
               Explorer

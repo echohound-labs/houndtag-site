@@ -3,6 +3,7 @@ import { TagMark } from "./tag-mark";
 
 const NAV = [
   { href: "/kennel", label: "Kennel" },
+  { href: "/whitepaper", label: "Whitepaper" },
   { href: "/register", label: "Register" },
 ];
 

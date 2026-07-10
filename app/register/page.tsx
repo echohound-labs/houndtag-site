@@ -17,8 +17,8 @@ const COMMANDS = [
   },
   {
     step: "Checkpoint",
-    body: "Hash your agent's memory state (SHA-256) and append the root. Pass the digest; the SDK derives the next seq and sends the transaction.",
-    cmd: "houndtag checkpoint EchoHound \\\n  --root 7214...acd2",
+    body: "Point the client at your agent's memory. It hashes the current state (SHA-256), derives the next seq, and anchors the fingerprint to the chain — you never compute a digest by hand.",
+    cmd: "houndtag checkpoint EchoHound \\\n  --memory ./agent-memory",
   },
   {
     step: "Verify",
@@ -70,12 +70,23 @@ export default async function RegisterPage() {
 
       {/* Install. */}
       <section className="mb-14">
-        <div className="stamp-label mb-3">1 · Install</div>
+        <div className="mb-3 flex flex-wrap items-center gap-3">
+          <span className="stamp-label">1 · Install</span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-phosphor/40 bg-phosphor/10 px-2.5 py-1 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-phosphor-glow">
+            <span className="h-1.5 w-1.5 rounded-full live-dot" aria-hidden="true" />
+            Client SDK · releasing soon
+          </span>
+        </div>
         <div className="engraved rounded-lg px-5 py-4">
           <code className="font-mono text-sm text-steel-100">
             <span className="text-steel-500">$ </span>pip install houndtag
           </code>
         </div>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-steel-400">
+          The <span className="font-mono text-steel-200">houndtag</span> client
+          packages the three commands below. The program is live on {config.network}{" "}
+          today — verify against it now; the pip release lands shortly.
+        </p>
       </section>
 
       {/* Three commands. */}
