@@ -38,6 +38,10 @@ export const metadata: Metadata = {
   description:
     "Hound Tag gives AI agents a verifiable on-chain identity and a tamper-evident memory chain on X1. Register once, checkpoint every memory root, let anyone verify the history.",
   keywords: ["AI agents", "X1", "agent identity", "tamper-evident memory", "Solana", "on-chain reputation"],
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "Hound Tag",
     description: "Verifiable identity and tamper-evident memory for AI agents on X1.",
