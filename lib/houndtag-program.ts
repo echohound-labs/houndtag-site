@@ -12,6 +12,7 @@
  *   checkpoint= ["checkpoint", agentTag, seq u64 LE]
  */
 
+import { Buffer } from "buffer"; // browser bundle has no global Buffer
 import { AnchorProvider, Program, type Idl } from "@coral-xyz/anchor";
 import type { AnchorWallet } from "@solana/wallet-adapter-react";
 import { Connection, PublicKey } from "@solana/web3.js";

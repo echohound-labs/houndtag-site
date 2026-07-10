@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Saira, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { WalletContextProvider } from "@/components/wallet-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -50,9 +51,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${saira.variable} ${plexSans.variable} ${plexMono.variable}`}>
       <body className="font-sans antialiased min-h-screen flex flex-col">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <WalletContextProvider>
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </WalletContextProvider>
       </body>
     </html>
   );

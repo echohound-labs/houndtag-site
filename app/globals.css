@@ -159,3 +159,59 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Wallet adapter, restyled to stamped-steel ──────────────────────────────
+   Two-class selectors (.htag-wallet.wallet-adapter-button…) outrank the
+   library's single-class rules, so these win without !important. */
+.htag-wallet-placeholder {
+  display: inline-block;
+  height: 34px;
+  width: 128px;
+  border: 1px solid var(--steel-700);
+  border-radius: 6px;
+}
+
+.htag-wallet.wallet-adapter-button {
+  height: auto;
+  padding: 9px 14px;
+  line-height: 1;
+  border-radius: 6px;
+  border: 1px solid var(--steel-600);
+  background: linear-gradient(180deg, var(--steel-800), var(--steel-900));
+  color: var(--steel-200);
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.htag-wallet.wallet-adapter-button-trigger {
+  background: rgba(63, 240, 138, 0.1);
+  border-color: rgba(63, 240, 138, 0.5);
+  color: var(--phosphor);
+  text-shadow: 0 0 12px rgba(63, 240, 138, 0.4);
+}
+
+.htag-wallet.wallet-adapter-button:not([disabled]):hover {
+  background: rgba(63, 240, 138, 0.18);
+  border-color: rgba(63, 240, 138, 0.6);
+  color: var(--phosphor);
+}
+
+.htag-wallet.wallet-adapter-button .wallet-adapter-button-start-icon {
+  margin-right: 8px;
+}
+
+/* Modal, nudged toward the steel palette. */
+.wallet-adapter-modal-wrapper {
+  background: var(--steel-900);
+  border: 1px solid var(--steel-700);
+}
+.wallet-adapter-modal-title {
+  color: var(--steel-100);
+}
+.wallet-adapter-modal-list .wallet-adapter-button {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+}

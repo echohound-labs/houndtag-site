@@ -1,5 +1,6 @@
 "use client";
 
+import { Buffer } from "buffer";
 import { useMemo, type ReactNode } from "react";
 import {
   ConnectionProvider,
@@ -8,6 +9,11 @@ import {
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { BackpackWalletAdapter } from "@solana/wallet-adapter-backpack";
 import "@solana/wallet-adapter-react-ui/styles.css";
+
+// Some web3/anchor paths reference a global Buffer; the browser has none.
+if (typeof globalThis !== "undefined" && !(globalThis as { Buffer?: unknown }).Buffer) {
+  (globalThis as { Buffer?: unknown }).Buffer = Buffer;
+}
 
 // Client-side RPC endpoint. Overridable via NEXT_PUBLIC_X1_RPC_URL; defaults to
 // X1 mainnet (mirrors the server-side X1_RPC_URL default in lib/chain.ts).

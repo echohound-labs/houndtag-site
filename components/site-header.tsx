@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TagMark } from "./tag-mark";
+import { WalletButton } from "./wallet-button";
 
 const NAV = [
   { href: "/kennel", label: "Kennel" },
@@ -29,12 +30,13 @@ export function SiteHeader() {
             </Link>
           ))}
           <span className="mx-1 hidden h-4 w-px bg-steel-700 sm:block" />
-          <span className="hidden items-center gap-2 rounded border border-steel-700 px-2.5 py-1.5 sm:inline-flex">
+          <span className="hidden items-center gap-2 rounded border border-steel-700 px-2.5 py-1.5 lg:inline-flex">
             <span className="h-1.5 w-1.5 rounded-full live-dot" aria-hidden="true" />
             <span className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-steel-300">
               X1 Mainnet
             </span>
           </span>
+          <WalletButton className="ml-1" />
         </nav>
       </div>
     </header>

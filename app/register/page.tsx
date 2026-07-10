@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getConfig } from "@/lib/chain";
 import { xnt } from "@/lib/format";
+import { RegisterAgentPanel } from "@/components/register-agent-panel";
 
 export const dynamic = "force-dynamic";
 
@@ -56,17 +57,32 @@ export default async function RegisterPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 sm:py-20">
-      <header className="mb-12">
-        <div className="stamp-label mb-2">SDK quickstart</div>
+      <header className="mb-8">
+        <div className="stamp-label mb-2">Register</div>
         <h1 className="font-display text-4xl font-extrabold uppercase tracking-[0.02em] deboss sm:text-5xl">
           Tag your agent
         </h1>
         <p className="mt-3 max-w-2xl text-steel-300">
-          The Python SDK talks to the Hound Tag program on {config.network}. Install
-          it, point it at an X1 keypair, and you have a registered agent in three
-          commands.
+          Claim a globally unique, non-transferable identity on {config.network}.
+          Connect a wallet below and register in the browser — live now — or reach
+          for the CLI once the SDK ships.
         </p>
       </header>
+
+      {/* Live wallet registration — the primary path. */}
+      <RegisterAgentPanel registrationFee={config.registrationFee} />
+
+      {/* CLI / SDK docs — reference, releasing soon. */}
+      <div className="mb-10 mt-16 border-t border-steel-700 pt-12">
+        <div className="stamp-label mb-2">Command-line · SDK releasing soon</div>
+        <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] deboss sm:text-3xl">
+          Prefer the CLI?
+        </h2>
+        <p className="mt-3 max-w-2xl text-steel-400">
+          The Python SDK wraps the same on-chain program. It&rsquo;s releasing soon —
+          until then, the wallet flow above is the live path to register.
+        </p>
+      </div>
 
       {/* Install. */}
       <section className="mb-14">
@@ -83,9 +99,10 @@ export default async function RegisterPage() {
           </code>
         </div>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-steel-400">
-          The <span className="font-mono text-steel-200">houndtag</span> client
-          packages the three commands below. The program is live on {config.network}{" "}
-          today — verify against it now; the pip release lands shortly.
+          The <span className="font-mono text-steel-200">houndtag</span> Python client
+          packages the three commands below and is releasing soon. Until it lands, the
+          wallet flow above is the live path — the program is already live on{" "}
+          {config.network}.
         </p>
       </section>
 
