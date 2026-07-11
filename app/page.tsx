@@ -71,6 +71,12 @@ export default async function HomePage() {
             let anyone verify the whole history.
           </p>
 
+          <p className="mt-5 max-w-xl border-l-2 border-phosphor/60 pl-4 font-mono text-sm leading-relaxed text-steel-200 sm:text-[0.95rem]">
+            Reputation that <span className="text-phosphor-glow">can&rsquo;t be faked</span>.
+            Memory that <span className="text-phosphor-glow">can&rsquo;t be quietly rewritten</span>.
+            Verification that <span className="text-phosphor-glow">asks no one&rsquo;s permission</span>.
+          </p>
+
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link
               href="/register"

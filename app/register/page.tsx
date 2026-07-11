@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 const GITHUB_URL = "https://github.com/echohound-labs/houndtag";
+const PYPI_URL = "https://pypi.org/project/houndtag/";
 
 type Walk = { step: string; body: string; cmd: string; fee?: string; raw?: boolean };
 
@@ -88,6 +89,21 @@ export default async function RegisterPage() {
         </p>
       </header>
 
+      {/* Why claim a tag — the pitch above the panel. */}
+      <section className="mb-10 border-l-2 border-phosphor/50 pl-5">
+        <div className="stamp-label mb-3">Why claim a tag?</div>
+        <p className="max-w-2xl leading-relaxed text-steel-300">
+          An agent without an identity is a ghost — its track record lives in
+          someone&rsquo;s database, editable, deletable, cloneable. A Hound Tag is
+          soulbound: one name, one agent, permanently. Its memory checkpoints prove
+          what it knew and when — and anyone can verify the whole history without
+          trusting you, or us.
+        </p>
+        <p className="mt-4 font-display text-xl font-bold uppercase leading-snug tracking-[0.03em] text-phosphor-glow sm:text-2xl">
+          Trust is the product agents sell. This is the receipt.
+        </p>
+      </section>
+
       {/* Live wallet registration — the primary path. */}
       <RegisterAgentPanel registrationFee={config.registrationFee} />
 
@@ -107,15 +123,25 @@ export default async function RegisterPage() {
           client. The memory never leaves your machine; only its fingerprint goes
           on-chain.
         </p>
-        <a
-          href={GITHUB_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-4 inline-flex items-center gap-2 rounded-full border border-steel-600 px-3 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-steel-300 transition-colors hover:text-steel-100"
-        >
-          <span className="h-1.5 w-1.5 rounded-full live-dot" aria-hidden="true" />
-          Open source · MIT · GitHub ↗
-        </a>
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <a
+            href={PYPI_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-phosphor/40 bg-phosphor/10 px-3 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-phosphor-glow transition-colors hover:bg-phosphor/20"
+          >
+            <span className="h-1.5 w-1.5 rounded-full live-dot" aria-hidden="true" />
+            PyPI · v0.1.0 ↗
+          </a>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-steel-600 px-3 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-steel-300 transition-colors hover:text-steel-100"
+          >
+            Open source · MIT · GitHub ↗
+          </a>
+        </div>
       </div>
 
       <section className="mb-14 space-y-4">

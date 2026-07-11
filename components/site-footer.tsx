@@ -49,6 +49,14 @@ export async function SiteFooter() {
             >
               GitHub
             </a>
+            <a
+              href="https://pypi.org/project/houndtag/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-steel-200"
+            >
+              PyPI
+            </a>
           </nav>
           <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-steel-600">
             Built on X1 · {config.network}
