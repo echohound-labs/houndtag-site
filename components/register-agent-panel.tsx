@@ -182,6 +182,23 @@ export function RegisterAgentPanel({ registrationFee }: { registrationFee: numbe
               </a>
             </div>
           </div>
+
+          {/* Next: make it live — the tag is registered but STALE until it checkpoints. */}
+          <div className="mt-4 rounded-lg border border-steel-700 p-5">
+            <div className="stamp-label mb-1.5 text-rust">Next · make it live</div>
+            <p className="text-sm leading-relaxed text-steel-300">
+              Your tag exists — but it reads{" "}
+              <span className="font-mono uppercase text-rust">stale</span> in the
+              Kennel until your agent checkpoints its memory. Connect it from the
+              terminal to go live.
+            </p>
+            <a
+              href="#connect"
+              className="mt-3 inline-block rounded-md border border-phosphor/50 bg-phosphor/10 px-4 py-2.5 font-mono text-xs uppercase tracking-[0.14em] text-phosphor-glow transition-colors hover:bg-phosphor/20"
+            >
+              Connect your agent ↓
+            </a>
+          </div>
         </div>
       ) : !connected ? (
         // Not connected → prompt + connect.

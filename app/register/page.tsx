@@ -7,24 +7,42 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Register",
-  description: "Install the Hound Tag SDK and register an agent in three commands. Fees and PDA spec.",
+  description:
+    "Register your agent in the browser, then connect it from the terminal with the open-source houndtag Python client. Fees and PDA spec.",
 };
 
-const COMMANDS = [
+const GITHUB_URL = "https://github.com/echohound-labs/houndtag";
+
+type Walk = { step: string; body: string; cmd: string; fee?: string; raw?: boolean };
+
+const WALKTHROUGH: Walk[] = [
   {
-    step: "Register",
-    body: "Claim a name and mint the identity PDA. Signed by your keypair; the owner becomes the only authority that can checkpoint.",
-    cmd: "houndtag register EchoHound \\\n  --keypair ~/.config/x1/id.json",
+    step: "Install",
+    body: "The client is on PyPI — open source, MIT. It wraps the same on-chain program this page reads.",
+    cmd: "pip install houndtag",
   },
   {
-    step: "Checkpoint",
-    body: "Point the client at your agent's memory. It hashes the current state (SHA-256), derives the next seq, and anchors the fingerprint to the chain — you never compute a digest by hand.",
-    cmd: "houndtag checkpoint EchoHound \\\n  --memory ./agent-memory",
+    step: "Preview",
+    body: "Point it at your agent's memory directory. It hashes the current state locally and prints the root hash and next sequence — nothing is sent.",
+    cmd: "houndtag checkpoint <YourAgent> --memory ./your-memory-dir --dry-run",
   },
   {
-    step: "Verify",
-    body: "Read the full chain for any agent and recompute each root. Exits non-zero if a link is broken. No keypair, no fee.",
-    cmd: "houndtag verify EchoHound",
+    step: "Anchor",
+    body: "Commit the fingerprint on-chain, signed by the wallet that owns the tag. Runs where your agent runs — the memory itself never leaves your machine, only its hash.",
+    cmd: "houndtag checkpoint <YourAgent> --memory ./your-memory-dir \\\n  --keypair ~/.config/solana/id.json",
+    fee: "0.01 XNT",
+  },
+  {
+    step: "Schedule",
+    body: "Drop it in cron (nightly, hourly — your call) so your agent keeps checkpointing on its own and stays LIVE in the Kennel instead of going stale.",
+    cmd: "# crontab -e — checkpoint nightly at 03:00\n0 3 * * *  houndtag checkpoint <YourAgent> --memory ./your-memory-dir --keypair ~/.config/solana/id.json --skip-unchanged",
+    raw: true,
+  },
+  {
+    step: "Verify anyone",
+    body: "Anyone can recompute an agent's checkpoint and compare it on-chain. Permissionless, no keypair, no fee.",
+    cmd: "houndtag verify <name> --seq N",
+    fee: "Free",
   },
 ];
 
@@ -64,54 +82,46 @@ export default async function RegisterPage() {
         </h1>
         <p className="mt-3 max-w-2xl text-steel-300">
           Claim a globally unique, non-transferable identity on {config.network}.
-          Connect a wallet below and register in the browser — live now — or reach
-          for the CLI once the SDK ships.
+          Connect a wallet below and register in the browser — then connect your
+          agent from the terminal with the open-source{" "}
+          <span className="font-mono text-steel-200">houndtag</span> client.
         </p>
       </header>
 
       {/* Live wallet registration — the primary path. */}
       <RegisterAgentPanel registrationFee={config.registrationFee} />
 
-      {/* CLI / SDK docs — reference, releasing soon. */}
-      <div className="mb-10 mt-16 border-t border-steel-700 pt-12">
-        <div className="stamp-label mb-2">Command-line · SDK releasing soon</div>
+      {/* Connect your agent — the live CLI walkthrough. */}
+      <div
+        id="connect"
+        className="mb-10 mt-16 scroll-mt-24 border-t border-steel-700 pt-12"
+      >
+        <div className="stamp-label mb-2">Step two · from the terminal</div>
         <h2 className="font-display text-2xl font-bold uppercase tracking-[0.03em] deboss sm:text-3xl">
-          Prefer the CLI?
+          Connect your agent
         </h2>
         <p className="mt-3 max-w-2xl text-steel-400">
-          The Python SDK wraps the same on-chain program. It&rsquo;s releasing soon —
-          until then, the wallet flow above is the live path to register.
+          Registration lives in the browser (above). Everything after — anchoring
+          your agent&rsquo;s memory — runs from wherever your agent runs, with the
+          open-source <span className="font-mono text-steel-200">houndtag</span>{" "}
+          client. The memory never leaves your machine; only its fingerprint goes
+          on-chain.
         </p>
+        <a
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-flex items-center gap-2 rounded-full border border-steel-600 px-3 py-1.5 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-steel-300 transition-colors hover:text-steel-100"
+        >
+          <span className="h-1.5 w-1.5 rounded-full live-dot" aria-hidden="true" />
+          Open source · MIT · GitHub ↗
+        </a>
       </div>
 
-      {/* Install. */}
-      <section className="mb-14">
-        <div className="mb-3 flex flex-wrap items-center gap-3">
-          <span className="stamp-label">1 · Install</span>
-          <span className="inline-flex items-center gap-2 rounded-full border border-phosphor/40 bg-phosphor/10 px-2.5 py-1 font-mono text-[0.625rem] uppercase tracking-[0.16em] text-phosphor-glow">
-            <span className="h-1.5 w-1.5 rounded-full live-dot" aria-hidden="true" />
-            Client SDK · releasing soon
-          </span>
-        </div>
-        <div className="engraved rounded-lg px-5 py-4">
-          <code className="font-mono text-sm text-steel-100">
-            <span className="text-steel-500">$ </span>pip install houndtag
-          </code>
-        </div>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-steel-400">
-          The <span className="font-mono text-steel-200">houndtag</span> Python client
-          packages the three commands below and is releasing soon. Until it lands, the
-          wallet flow above is the live path — the program is already live on{" "}
-          {config.network}.
-        </p>
-      </section>
-
-      {/* Three commands. */}
-      <section className="mb-14">
-        <div className="stamp-label mb-4">2 · Three commands</div>
-        <div className="space-y-4">
-          {COMMANDS.map((c, i) => (
-            <div key={c.step} className="panel rounded-lg p-6">
+      <section className="mb-14 space-y-4">
+        {WALKTHROUGH.map((c, i) => (
+          <div key={c.step} className="panel rounded-lg p-6">
+            <div className="flex items-baseline justify-between gap-3">
               <div className="flex items-baseline gap-3">
                 <span className="font-display text-2xl font-extrabold text-steel-700">
                   0{i + 1}
@@ -120,16 +130,19 @@ export default async function RegisterPage() {
                   {c.step}
                 </h3>
               </div>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-steel-300">{c.body}</p>
-              <div className="engraved mt-4 rounded px-4 py-3">
-                <pre className="overflow-x-auto font-mono text-sm text-steel-200">
-                  <span className="text-steel-500">$ </span>
-                  {c.cmd}
-                </pre>
-              </div>
+              {c.fee && (
+                <span className="stamp-label text-phosphor/70">{c.fee}</span>
+              )}
             </div>
-          ))}
-        </div>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-steel-300">{c.body}</p>
+            <div className="engraved mt-4 rounded px-4 py-3">
+              <pre className="overflow-x-auto font-mono text-sm text-steel-200">
+                {!c.raw && <span className="text-steel-500">$ </span>}
+                {c.cmd}
+              </pre>
+            </div>
+          </div>
+        ))}
       </section>
 
       {/* Fees. */}

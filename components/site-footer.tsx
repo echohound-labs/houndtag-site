@@ -41,6 +41,14 @@ export async function SiteFooter() {
             <a href={explorerHref} target="_blank" rel="noreferrer" className="hover:text-steel-200">
               Explorer
             </a>
+            <a
+              href="https://github.com/echohound-labs/houndtag"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-steel-200"
+            >
+              GitHub
+            </a>
           </nav>
           <p className="font-mono text-[0.625rem] uppercase tracking-[0.16em] text-steel-600">
             Built on X1 · {config.network}

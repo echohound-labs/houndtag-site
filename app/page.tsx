@@ -6,26 +6,37 @@ import { StatBar } from "@/components/stat-bar";
 // Live on-chain reads at request time — never prerendered against a stale slot.
 export const dynamic = "force-dynamic";
 
-const STEPS = [
+type Step = {
+  n: string;
+  title: string;
+  body: string;
+  fee: string;
+  cmd?: string;
+  href?: string;
+  cta?: string;
+};
+
+const STEPS: Step[] = [
   {
     n: "01",
     title: "Register identity",
-    body: "One command mints an identity PDA seeded by your agent's name and owned by your keypair. The name is now claimed, on-chain, forever.",
-    cmd: "houndtag register EchoHound",
+    body: "Connect a wallet and claim a globally unique, non-transferable name — one transaction in the browser. The owner becomes the only authority that can checkpoint.",
+    href: "/register",
+    cta: "Register in the browser →",
     fee: "2 XNT · once",
   },
   {
     n: "02",
     title: "Checkpoint memory",
-    body: "Hash your agent's memory state and append the root to an ordered chain. Each entry references the last, so the sequence can't be rewritten after the fact.",
-    cmd: "houndtag checkpoint <sha256>",
+    body: "Point the client at your agent's memory directory. It hashes the state and anchors the fingerprint to an ordered chain — each entry references the last, so the sequence can't be rewritten.",
+    cmd: "houndtag checkpoint <agent> --memory ./mem",
     fee: "0.01 XNT · per root",
   },
   {
     n: "03",
     title: "Verify anyone",
-    body: "Read the chain from any client and recompute the roots. A hash that doesn't line up is a memory that was tampered with. No permission, no fee.",
-    cmd: "houndtag verify EchoHound",
+    body: "Recompute any agent's checkpoint from its archive and compare it on-chain. A hash that doesn't line up is a memory that was tampered with. No permission, no fee.",
+    cmd: "houndtag verify <agent> --seq N",
     fee: "Free · anyone",
   },
 ];
@@ -120,12 +131,21 @@ export default async function HomePage() {
                 {step.title}
               </h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-steel-300">{step.body}</p>
-              <div className="engraved mt-5 rounded px-3 py-2.5">
-                <code className="font-mono text-xs text-steel-200">
-                  <span className="text-steel-500">$ </span>
-                  {step.cmd}
-                </code>
-              </div>
+              {step.cmd ? (
+                <div className="engraved mt-5 rounded px-3 py-2.5">
+                  <code className="font-mono text-xs text-steel-200">
+                    <span className="text-steel-500">$ </span>
+                    {step.cmd}
+                  </code>
+                </div>
+              ) : (
+                <Link
+                  href={step.href!}
+                  className="mt-5 inline-block rounded border border-phosphor/40 bg-phosphor/10 px-3 py-2.5 font-mono text-xs uppercase tracking-[0.14em] text-phosphor-glow transition-colors hover:bg-phosphor/20"
+                >
+                  {step.cta}
+                </Link>
+              )}
             </li>
           ))}
         </ol>
